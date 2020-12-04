@@ -24,7 +24,7 @@
     "web-vitals": "^0.2.4"
   },
   "lint-staged": {
-    "*.{ts,js}": "eslint --cache --fix"
+    "*.{tsx,ts,js}": "eslint --cache --fix"
   },
   "scripts": {
     "start": "react-scripts start",
