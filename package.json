@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "pretty-quick --staged && lint-staged"
   },
   "eslintConfig": {
     "extends": [
@@ -58,11 +59,10 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm lint"
+      "pre-commit": "yarn lint"
     }
   },
   "lint-staged": {
     "*.{ts,js}": "eslint --cache --fix"
-  },
-  "lint":"pretty-quick --staged && lint-staged"
+  }
 }
