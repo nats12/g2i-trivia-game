@@ -1,3 +1,14 @@
+import { createStore } from "redux";
+import rootReducer from "../reducers/index";
+
+/**
+ *
+ * @param initialState
+ */
+export const storeFactory = (initialState: any) => {
+  return createStore(rootReducer, initialState);
+};
+
 /**
  * Return node(s) with the given data-test attribute.
  * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper.
