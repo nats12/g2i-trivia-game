@@ -2,8 +2,11 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { colours } from "../../theme/colours";
 import { IQuestionsState } from "../../types/StateTypes";
+import { StyledButton } from "../styled/Button";
 import { CentredContainer } from "../styled/CentredContainer";
+import QuestionCard from "../styled/QuestionCard";
 import { ScreenContainer } from "../styled/ScreenContainer";
 import { StyledH2 } from "../styled/ScreenHeadings";
 import StyledLoader from "../StyledLoader";
@@ -20,7 +23,11 @@ const QuizInnerContainer = styled.div`
 `;
 
 const ButtonsContainer = styled.div`
+  position: relative;
   display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export const Quiz = ({ questions }: any) => {
@@ -39,6 +46,26 @@ export const Quiz = ({ questions }: any) => {
           <Col>
             <QuizInnerContainer>
               <StyledH2>Enterainment: Video Games</StyledH2>
+              <QuestionCard>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Officiis laboriosam ex beatae labore earum ipsa suscipit
+                explicabo temporibus odit delectus hic, minima in dignissimos.
+                Incidunt non ut optio officiis sint?
+              </QuestionCard>
+              <ButtonsContainer>
+                <StyledButton
+                  border={colours.green}
+                  backgroundColour={colours.green}
+                >
+                  True
+                </StyledButton>
+                <StyledButton
+                  border={colours.red}
+                  backgroundColour={colours.red}
+                >
+                  False
+                </StyledButton>
+              </ButtonsContainer>
             </QuizInnerContainer>
           </Col>
         </Row>
