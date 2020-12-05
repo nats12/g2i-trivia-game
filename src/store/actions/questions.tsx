@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const actionTypes = {
   FETCH_QUESTIONS: "FETCH_QUESTIONS",
+  UPDATE_CURRENT_QUESTION: "UPDATE_CURRENT_QUESTION",
 };
 
 export const fetch = () => {
@@ -30,4 +31,8 @@ export const fetch = () => {
       console.log(err);
     }
   };
+};
+
+export const updateCurrentQuestion = () => {
+  return { type: actionTypes.UPDATE_CURRENT_QUESTION };
 };

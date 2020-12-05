@@ -1,12 +1,10 @@
 import { Action } from "history";
+import { IQuestionsState } from "../../types/StateTypes";
 import { actionTypes } from "../actions/questions";
 
-const initialState: IState = {
+const initialState: IQuestionsState = {
   questions: [],
-};
-
-export type IState = {
-  questions: [];
+  currentQuestion: 0,
 };
 
 type IAction = {
@@ -15,7 +13,7 @@ type IAction = {
 };
 
 export const questionsReducer = (
-  state: IState = initialState,
+  state: IQuestionsState = initialState,
   action: IAction
 ) => {
   switch (action.type) {
@@ -23,6 +21,12 @@ export const questionsReducer = (
       return {
         ...state,
         questions: action.payload,
+      };
+    case actionTypes.UPDATE_CURRENT_QUESTION:
+      return {
+        ...state,
+        questions: state.questions,
+        currentQuestion: state.currentQuestion + 1,
       };
     default:
       return state;

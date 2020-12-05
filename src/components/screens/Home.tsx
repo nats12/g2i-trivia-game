@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 
 import * as questionsActions from "../../store/actions/questions";
-import { IState } from "../../store/reducers/questions";
 import { ScreenContainer } from "../styled/ScreenContainer";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -15,6 +14,7 @@ import { HalfCircleBackground } from "../styled/HalfCircleBackground";
 import StyledLoader from "../StyledLoader";
 import { CentredContainer } from "../styled/CentredContainer";
 import { Link } from "react-router-dom";
+import { IQuestionsState } from "../../types/StateTypes";
 
 const HomeTopContainer = styled.div`
   color: white;
@@ -66,7 +66,7 @@ export const Home = ({ questions }: any) => {
   );
 };
 
-const mapStateToProps = (state: IState, ownProps: any) => ({
+const mapStateToProps = (state: IQuestionsState, ownProps: any) => ({
   questions: state.questions,
 });
 

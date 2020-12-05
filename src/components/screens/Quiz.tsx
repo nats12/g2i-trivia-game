@@ -32,10 +32,11 @@ const ButtonsContainer = styled.div`
   justify-content: center;
 `;
 
-export const Quiz = ({ questions }: any) => {
-  const [answeredQuestions, setAnsweredQuestions] = useState<number>(0);
-
-  console.log(questions);
+export const Quiz = ({
+  questions,
+  currentQuestion,
+  updateCurrentQuestion,
+}: any) => {
   if (questions.questions.length === 0 || !questions.questions) {
     return (
       <CentredContainer>
@@ -45,8 +46,10 @@ export const Quiz = ({ questions }: any) => {
   }
 
   const nextQuestion = () => {
-    setAnsweredQuestions((prev: any) => prev + 1);
+    updateCurrentQuestion();
   };
+
+  console.log(questions.questions);
 
   return (
     <ScreenContainer data-test="component-quiz">
@@ -54,18 +57,18 @@ export const Quiz = ({ questions }: any) => {
         <Row xs={12}>
           <Col>
             <QuizInnerContainer>
-              {answeredQuestions > questions.questions.length - 1 ? (
+              {currentQuestion > questions.questions.length - 1 ? (
                 "test"
               ) : (
                 <>
                   <StyledH2>
-                    {questions.questions[answeredQuestions].category}
+                    {questions.questions[currentQuestion].category}
                   </StyledH2>
                   <QuestionCard
-                    key={answeredQuestions}
-                    questionNumber={answeredQuestions}
+                    key={currentQuestion}
+                    questionNumber={currentQuestion}
                   >
-                    {questions.questions[answeredQuestions].question}
+                    {questions.questions[currentQuestion].question}
                   </QuestionCard>
                   <ButtonsContainer>
                     <StyledButton
@@ -93,8 +96,17 @@ export const Quiz = ({ questions }: any) => {
   );
 };
 
-const mapStateToProps = (state: IQuestionsState, ownProps: any) => ({
+const mapStateToProps = (state: any, ownProps: any) => ({
   questions: state.questions,
+  currentQuestion: state.questions.currentQuestion,
 });
 
-export default connect(mapStateToProps)(Quiz);
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    updateCurrentQuestion: (id: number) => {
+      dispatch(questionsActions.updateCurrentQuestion());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
