@@ -9,7 +9,7 @@ const QuestionCard = (props: any) => {
           <Card.Text>{props.children}</Card.Text>
         </Card.Body>
       </Card>
-      <small>1 of 10</small>
+      <small>{props.questionNumber + 1} of 10</small>
     </>
   );
 };

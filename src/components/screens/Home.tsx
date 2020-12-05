@@ -33,20 +33,7 @@ const HomeBottomContainer = styled.div`
 `;
 
 export const Home = ({ questions }: any) => {
-  const dispatch = useDispatch();
-
-  const fetchQuestions = useCallback(() => {
-    try {
-      dispatch(questionsActions.fetch());
-    } catch (err) {
-      console.log(err);
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    fetchQuestions();
-  }, [fetchQuestions]);
-
+  console.log(questions);
   if (questions.length === 0 || !questions) {
     return (
       <CentredContainer>
