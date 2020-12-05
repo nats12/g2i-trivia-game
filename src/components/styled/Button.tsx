@@ -14,6 +14,11 @@ export const StyledButton = styled.button<IButton>`
   font-size: 1em;
   font-weight: 600;
 
+  a {
+    text-decoration: none;
+    color: ${(props) => props.color || "white"};
+  }
+
   &:hover {
     cursor: pointer;
   }

@@ -14,6 +14,7 @@ import { colours } from "../../theme/colours";
 import { HalfCircleBackground } from "../styled/HalfCircleBackground";
 import StyledLoader from "../StyledLoader";
 import { CentredContainer } from "../styled/CentredContainer";
+import { Link } from "react-router-dom";
 
 const HomeTopContainer = styled.div`
   color: white;
@@ -67,7 +68,7 @@ export const Home = ({ questions }: any) => {
             <HomeBottomContainer>
               <HalfCircleBackground>
                 <StyledButton backgroundColour={colours.primary}>
-                  Begin
+                  <Link to="/quiz">Begin</Link>
                 </StyledButton>
               </HalfCircleBackground>
             </HomeBottomContainer>
