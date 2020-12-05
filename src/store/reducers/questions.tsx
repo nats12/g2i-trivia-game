@@ -1,15 +1,16 @@
 import { Action } from "history";
-import { IQuestionsState } from "../../types/StateTypes";
+import { IQuestionsState } from "../../interfaces/StateInterfaces";
 import { actionTypes } from "../actions/questions";
 
 const initialState: IQuestionsState = {
   questions: [],
   currentQuestion: 0,
+  results: [],
 };
 
 type IAction = {
   type: string;
-  payload: [];
+  payload: any;
 };
 
 export const questionsReducer = (
@@ -27,6 +28,15 @@ export const questionsReducer = (
         ...state,
         questions: state.questions,
         currentQuestion: state.currentQuestion + 1,
+      };
+    case actionTypes.UPDATE_RESULTS:
+      const results: {}[] = [...state.results];
+      results.push(action.payload);
+
+      return {
+        ...state,
+        questions: state.questions,
+        results,
       };
     default:
       return state;

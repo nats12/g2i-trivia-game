@@ -5,13 +5,14 @@ import styled from "styled-components";
 
 import * as questionsActions from "../../store/actions/questions";
 import { colours } from "../../theme/colours";
-import { IQuestionsState } from "../../types/StateTypes";
+import { IQuestionsState } from "../../interfaces/StateInterfaces";
 import { StyledButton } from "../styled/Button";
 import { CentredContainer } from "../styled/CentredContainer";
 import QuestionCard from "../styled/QuestionCard";
 import { ScreenContainer } from "../styled/ScreenContainer";
 import { StyledH2 } from "../styled/ScreenHeadings";
 import StyledLoader from "../StyledLoader";
+import Question from "../../models/Question";
 
 const QuizInnerContainer = styled.div`
   display: flex;
@@ -32,10 +33,20 @@ const ButtonsContainer = styled.div`
   justify-content: center;
 `;
 
+const CardContainer = styled.div`
+  min-height: 300px;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 export const Quiz = ({
   questions,
   currentQuestion,
   updateCurrentQuestion,
+  updateResults,
+  results,
 }: any) => {
   if (questions.questions.length === 0 || !questions.questions) {
     return (
@@ -45,12 +56,12 @@ export const Quiz = ({
     );
   }
 
-  const nextQuestion = () => {
+  const nextQuestion = (question: Question, answer: string) => {
     updateCurrentQuestion();
+    updateResults(question.id, question.text, question.correct_answer, answer);
   };
 
-  console.log(questions.questions);
-
+  console.log(results);
   return (
     <ScreenContainer data-test="component-quiz">
       <Container>
@@ -64,22 +75,34 @@ export const Quiz = ({
                   <StyledH2>
                     {questions.questions[currentQuestion].category}
                   </StyledH2>
-                  <QuestionCard
-                    key={currentQuestion}
-                    questionNumber={currentQuestion}
-                  >
-                    {questions.questions[currentQuestion].question}
-                  </QuestionCard>
+                  <CardContainer>
+                    <QuestionCard
+                      key={currentQuestion}
+                      questionNumber={currentQuestion}
+                    >
+                      {questions.questions[currentQuestion].text}
+                    </QuestionCard>
+                  </CardContainer>
                   <ButtonsContainer>
                     <StyledButton
-                      onClick={nextQuestion}
+                      onClick={() =>
+                        nextQuestion(
+                          questions.questions[currentQuestion],
+                          "True"
+                        )
+                      }
                       border={colours.green}
                       backgroundColour={colours.green}
                     >
                       True
                     </StyledButton>
                     <StyledButton
-                      onClick={nextQuestion}
+                      onClick={() =>
+                        nextQuestion(
+                          questions.questions[currentQuestion],
+                          "False"
+                        )
+                      }
                       border={colours.red}
                       backgroundColour={colours.red}
                     >
@@ -99,12 +122,28 @@ export const Quiz = ({
 const mapStateToProps = (state: any, ownProps: any) => ({
   questions: state.questions,
   currentQuestion: state.questions.currentQuestion,
+  results: state.questions.results,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     updateCurrentQuestion: (id: number) => {
       dispatch(questionsActions.updateCurrentQuestion());
+    },
+    updateResults: (
+      id: number,
+      question: string,
+      correct_answer: string,
+      given_answer: string
+    ) => {
+      dispatch(
+        questionsActions.updateResults(
+          id,
+          question,
+          correct_answer,
+          given_answer
+        )
+      );
     },
   };
 };

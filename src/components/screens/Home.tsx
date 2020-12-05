@@ -14,7 +14,7 @@ import { HalfCircleBackground } from "../styled/HalfCircleBackground";
 import StyledLoader from "../StyledLoader";
 import { CentredContainer } from "../styled/CentredContainer";
 import { Link } from "react-router-dom";
-import { IQuestionsState } from "../../types/StateTypes";
+import { IQuestionsState } from "../../interfaces/StateInterfaces";
 
 const HomeTopContainer = styled.div`
   color: white;
