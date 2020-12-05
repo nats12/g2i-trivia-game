@@ -12,6 +12,8 @@ import styled from "styled-components";
 import { StyledButton } from "../styled/Button";
 import { colours } from "../../theme/colours";
 import { HalfCircleBackground } from "../styled/HalfCircleBackground";
+import StyledLoader from "../StyledLoader";
+import { CentredContainer } from "../styled/CentredContainer";
 
 const HomeTopContainer = styled.div`
   color: white;
@@ -44,8 +46,12 @@ export const Home = ({ questions }: any) => {
     fetchQuestions();
   }, [fetchQuestions]);
 
-  if (questions.length === 0) {
-    return <h1 data-test="component-loading">loading...</h1>;
+  if (questions.length === 0 || !questions) {
+    return (
+      <CentredContainer>
+        <StyledLoader data-test="component-loading" />
+      </CentredContainer>
+    );
   }
 
   return (
