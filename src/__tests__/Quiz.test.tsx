@@ -11,9 +11,15 @@ jest.mock("react-redux", () => ({
   connect: () => jest.fn(),
 }));
 
-const setup = (questions: any = {}) => {
-  const store = testUtils.storeFactory(questions);
-  const wrapper = shallow(<Quiz questions={store.getState().questions} />);
+const setup = (state: any = {}) => {
+  const store = testUtils.storeFactory(state);
+
+  const wrapper = shallow(
+    <Quiz
+      questions={store.getState().questions}
+      error={store.getState().errors}
+    />
+  );
 
   return wrapper;
 };
@@ -24,10 +30,11 @@ describe("Store has questions", () => {
   beforeEach(() => {
     wrapper = setup({
       questions: [{ category: "science", text: "test text" }],
+      errors: null,
     });
   });
 
-  test("Quiz component renders without error", () => {
+  test("Quiz component renders", () => {
     const component = testUtils.findByTestAttr(wrapper, "component-quiz");
     expect(component.exists()).toBe(true);
   });
@@ -42,16 +49,41 @@ describe("Store has no questions", () => {
   let wrapper: any;
 
   beforeEach(() => {
-    wrapper = setup({ questions: [] });
+    wrapper = setup({ questions: [], errors: null });
   });
 
-  test("Quiz component doesn't render error", () => {
+  test("Quiz component doesn't render", () => {
     const component = testUtils.findByTestAttr(wrapper, "component-quiz");
     expect(component.exists()).toBe(false);
   });
 
   test("Loading title renders", () => {
     const component = testUtils.findByTestAttr(wrapper, "component-loading");
+    expect(component.exists()).toBe(true);
+  });
+});
+
+describe("Store has an error", () => {
+  let wrapper: any;
+
+  beforeEach(() => {
+    wrapper = setup({
+      errors: "Network error",
+    });
+  });
+
+  test("Quiz component doesn't render", () => {
+    const component = testUtils.findByTestAttr(wrapper, "component-quiz");
+    expect(component.exists()).toBe(false);
+  });
+
+  test("Loading component renders", () => {
+    const component = testUtils.findByTestAttr(wrapper, "component-loading");
+    expect(component.exists()).toBe(false);
+  });
+
+  test("Error component renders", () => {
+    const component = testUtils.findByTestAttr(wrapper, "component-error");
     expect(component.exists()).toBe(true);
   });
 });

@@ -12,9 +12,14 @@ jest.mock("react-redux", () => ({
   connect: () => jest.fn(),
 }));
 
-const setup = (questions = {}) => {
-  const store = testUtils.storeFactory(questions);
-  const wrapper = shallow(<Home questions={store.getState().questions} />);
+const setup = (state = {}) => {
+  const store = testUtils.storeFactory(state);
+  const wrapper = shallow(
+    <Home
+      questions={store.getState().questions}
+      error={store.getState().errors}
+    />
+  );
 
   return wrapper;
 };
@@ -23,7 +28,7 @@ describe("Store has questions", () => {
   let wrapper: any;
 
   beforeEach(() => {
-    wrapper = setup({ questions: ["test"] });
+    wrapper = setup({ questions: ["test"], errors: null });
   });
 
   afterEach(() => {
@@ -45,7 +50,7 @@ describe("Store has no questions", () => {
   let wrapper: any;
 
   beforeEach(() => {
-    wrapper = setup({ questions: [] });
+    wrapper = setup({ questions: [], errors: null });
   });
 
   test("Home component doesn't render", () => {
@@ -55,6 +60,31 @@ describe("Store has no questions", () => {
 
   test("Loading title does render", () => {
     const component = testUtils.findByTestAttr(wrapper, "component-loading");
+    expect(component.exists()).toBe(true);
+  });
+});
+
+describe("Store has an error", () => {
+  let wrapper: any;
+
+  beforeEach(() => {
+    wrapper = setup({
+      errors: "Network error",
+    });
+  });
+
+  test("Home component doesn't render", () => {
+    const component = testUtils.findByTestAttr(wrapper, "component-quiz");
+    expect(component.exists()).toBe(false);
+  });
+
+  test("Loading component renders", () => {
+    const component = testUtils.findByTestAttr(wrapper, "component-loading");
+    expect(component.exists()).toBe(false);
+  });
+
+  test("Error component renders", () => {
+    const component = testUtils.findByTestAttr(wrapper, "component-error");
     expect(component.exists()).toBe(true);
   });
 });

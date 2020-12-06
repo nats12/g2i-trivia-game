@@ -4,6 +4,10 @@ export interface IQuestionsState {
   results: [];
 }
 
+export interface IErrorsState {
+  error: null | string;
+}
+
 export interface IAction {
   type: string;
   payload: [];

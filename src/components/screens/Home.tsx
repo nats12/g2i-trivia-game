@@ -15,6 +15,7 @@ import StyledLoader from "../StyledLoader";
 import { CentredContainer } from "../styled/CentredContainer";
 import { Link } from "react-router-dom";
 import { IQuestionsState } from "../../interfaces/StateInterfaces";
+import { Error } from "../Error";
 
 const HomeTopContainer = styled.div`
   color: white;
@@ -32,8 +33,16 @@ const HomeBottomContainer = styled.div`
   overflow: hidden;
 `;
 
-export const Home = ({ questions }: any) => {
-  if (questions.length === 0 || !questions) {
+export const Home = ({ questions, error }: any = []) => {
+  if (error !== null && error !== "") {
+    return (
+      <CentredContainer data-test="component-error">
+        <Error>{error}</Error>
+      </CentredContainer>
+    );
+  }
+
+  if (questions.length === 0) {
     return (
       <CentredContainer>
         <StyledLoader data-test="component-loading" />
@@ -65,8 +74,9 @@ export const Home = ({ questions }: any) => {
   );
 };
 
-const mapStateToProps = (state: IQuestionsState, ownProps: any) => ({
-  questions: state.questions,
+const mapStateToProps = (state: any, ownProps: any) => ({
+  questions: state.questions.questions,
+  error: state.errors.error,
 });
 
 export default connect(mapStateToProps)(Home);

@@ -13,6 +13,7 @@ import { ScreenContainer } from "../styled/ScreenContainer";
 import { StyledH2 } from "../styled/ScreenHeadings";
 import StyledLoader from "../StyledLoader";
 import Question from "../../models/Question";
+import { Error } from "../Error";
 
 const QuizInnerContainer = styled.div`
   display: flex;
@@ -47,8 +48,17 @@ export const Quiz = ({
   updateCurrentQuestion,
   updateResults,
   results,
-}: any) => {
-  if (questions.length === 0) {
+  error,
+}: any = []) => {
+  if (error !== null && error !== "") {
+    return (
+      <CentredContainer data-test="component-error">
+        <Error>{error}</Error>
+      </CentredContainer>
+    );
+  }
+
+  if (questions.length === 0 && error === null) {
     return (
       <CentredContainer>
         <StyledLoader data-test="component-loading" />
@@ -114,6 +124,7 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   questions: state.questions.questions,
   currentQuestion: state.questions.currentQuestion,
   results: state.questions.results,
+  error: state.errors.error,
 });
 
 const mapDispatchToProps = (dispatch: any) => {

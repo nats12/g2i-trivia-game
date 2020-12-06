@@ -4,10 +4,11 @@ import { createBrowserHistory } from "history";
 
 import * as questionsActions from "../store/actions/questions";
 import "../App.css";
-import { Home } from "./screens/Home";
-import { Quiz } from "./screens/Quiz";
+import Home from "./screens/Home";
+import Quiz from "./screens/Quiz";
 import Results from "./screens/Results";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { IQuestionsState } from "../interfaces/StateInterfaces";
 
 function App() {
   const history = createBrowserHistory();
