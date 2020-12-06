@@ -5,7 +5,6 @@ import { actionTypes as errorActionTypes } from "../actions/error";
 export const actionTypes = {
   FETCH_QUESTIONS: "FETCH_QUESTIONS",
   UPDATE_CURRENT_QUESTION: "UPDATE_CURRENT_QUESTION",
-  UPDATE_RESULTS: "UPDATE_RESULTS",
 };
 
 export const fetch = () => {
@@ -67,15 +66,4 @@ export const fetch = () => {
 
 export const updateCurrentQuestion = () => {
   return { type: actionTypes.UPDATE_CURRENT_QUESTION };
-};
-
-export const updateResults = (
-  id: number,
-  question: string,
-  correct_answer: string,
-  given_answer: string
-) => {
-  const ans = { id, question, correct_answer, given_answer };
-
-  return { type: actionTypes.UPDATE_RESULTS, payload: ans };
 };

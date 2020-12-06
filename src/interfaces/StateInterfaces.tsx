@@ -1,6 +1,9 @@
 export interface IQuestionsState {
   questions: [];
   currentQuestion: number;
+}
+
+export interface IResultsState {
   results: [];
 }
 

@@ -4,6 +4,7 @@ import { connect, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import * as questionsActions from "../../store/actions/questions";
+import * as resultsActions from "../../store/actions/results";
 import { colours } from "../../theme/colours";
 import { IQuestionsState } from "../../interfaces/StateInterfaces";
 import { StyledButton } from "../styled/Button";
@@ -14,6 +15,7 @@ import { StyledH2 } from "../styled/ScreenHeadings";
 import StyledLoader from "../StyledLoader";
 import Question from "../../models/Question";
 import { Error } from "../Error";
+import { Results } from "./Results";
 
 const QuizInnerContainer = styled.div`
   display: flex;
@@ -64,6 +66,10 @@ export const Quiz = ({
         <StyledLoader data-test="component-loading" />
       </CentredContainer>
     );
+  }
+
+  if (results.length === questions.length) {
+    return <Results results={results} />;
   }
 
   const nextQuestion = (question: Question, answer: string) => {
@@ -123,7 +129,7 @@ export const Quiz = ({
 const mapStateToProps = (state: any, ownProps: any) => ({
   questions: state.questions.questions,
   currentQuestion: state.questions.currentQuestion,
-  results: state.questions.results,
+  results: state.results.results,
   error: state.errors.error,
 });
 
@@ -139,12 +145,7 @@ const mapDispatchToProps = (dispatch: any) => {
       given_answer: string
     ) => {
       dispatch(
-        questionsActions.updateResults(
-          id,
-          question,
-          correct_answer,
-          given_answer
-        )
+        resultsActions.updateResults(id, question, correct_answer, given_answer)
       );
     },
   };

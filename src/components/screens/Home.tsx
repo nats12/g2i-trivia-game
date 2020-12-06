@@ -77,6 +77,7 @@ export const Home = ({ questions, error }: any = []) => {
 const mapStateToProps = (state: any, ownProps: any) => ({
   questions: state.questions.questions,
   error: state.errors.error,
+  results: state.results.results,
 });
 
 export default connect(mapStateToProps)(Home);

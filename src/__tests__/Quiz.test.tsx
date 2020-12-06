@@ -18,6 +18,7 @@ const setup = (state: any = {}) => {
     <Quiz
       questions={store.getState().questions}
       error={store.getState().errors}
+      results={store.getState().results}
     />
   );
 
@@ -31,6 +32,7 @@ describe("Store has questions", () => {
     wrapper = setup({
       questions: [{ category: "science", text: "test text" }],
       errors: null,
+      results: [],
     });
   });
 
@@ -49,7 +51,7 @@ describe("Store has no questions", () => {
   let wrapper: any;
 
   beforeEach(() => {
-    wrapper = setup({ questions: [], errors: null });
+    wrapper = setup({ questions: [], errors: null, results: [] });
   });
 
   test("Quiz component doesn't render", () => {
@@ -85,5 +87,19 @@ describe("Store has an error", () => {
   test("Error component renders", () => {
     const component = testUtils.findByTestAttr(wrapper, "component-error");
     expect(component.exists()).toBe(true);
+  });
+});
+
+describe("Quiz has finished", () => {
+  let wrapper: any;
+  const results = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+
+  beforeEach(() => {
+    wrapper = setup({ results });
+  });
+
+  test("Quiz component doesn't render", () => {
+    const component = testUtils.findByTestAttr(wrapper, "component-quiz");
+    expect(component.exists()).toBe(false);
   });
 });
