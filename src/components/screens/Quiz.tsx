@@ -48,7 +48,7 @@ export const Quiz = ({
   updateResults,
   results,
 }: any) => {
-  if (questions.questions.length === 0 || !questions.questions) {
+  if (questions.length === 0) {
     return (
       <CentredContainer>
         <StyledLoader data-test="component-loading" />
@@ -61,35 +61,29 @@ export const Quiz = ({
     updateResults(question.id, question.text, question.correct_answer, answer);
   };
 
-  console.log(results);
   return (
     <ScreenContainer data-test="component-quiz">
       <Container>
         <Row xs={12}>
           <Col>
             <QuizInnerContainer>
-              {currentQuestion > questions.questions.length - 1 ? (
+              {currentQuestion > questions.length - 1 ? (
                 "test"
               ) : (
                 <>
-                  <StyledH2>
-                    {questions.questions[currentQuestion].category}
-                  </StyledH2>
+                  <StyledH2>{questions[currentQuestion]?.category}</StyledH2>
                   <CardContainer>
                     <QuestionCard
                       key={currentQuestion}
                       questionNumber={currentQuestion}
                     >
-                      {questions.questions[currentQuestion].text}
+                      {questions[currentQuestion]?.text}
                     </QuestionCard>
                   </CardContainer>
                   <ButtonsContainer>
                     <StyledButton
                       onClick={() =>
-                        nextQuestion(
-                          questions.questions[currentQuestion],
-                          "True"
-                        )
+                        nextQuestion(questions[currentQuestion], "True")
                       }
                       border={colours.green}
                       backgroundColour={colours.green}
@@ -98,10 +92,7 @@ export const Quiz = ({
                     </StyledButton>
                     <StyledButton
                       onClick={() =>
-                        nextQuestion(
-                          questions.questions[currentQuestion],
-                          "False"
-                        )
+                        nextQuestion(questions[currentQuestion], "False")
                       }
                       border={colours.red}
                       backgroundColour={colours.red}
@@ -120,7 +111,7 @@ export const Quiz = ({
 };
 
 const mapStateToProps = (state: any, ownProps: any) => ({
-  questions: state.questions,
+  questions: state.questions.questions,
   currentQuestion: state.questions.currentQuestion,
   results: state.questions.results,
 });

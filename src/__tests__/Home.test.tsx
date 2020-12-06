@@ -7,12 +7,7 @@ import { Home } from "../components/screens/Home";
 configure({ adapter: new Adapter() });
 
 jest.mock("react-redux", () => ({
-  useSelector: jest
-    .fn((fn) => fn())
-    .mockReturnValue({
-      users: [],
-      usersState: [],
-    }),
+  useSelector: jest.fn((fn) => fn()).mockReturnValue({}),
   useDispatch: jest.fn(),
   connect: () => jest.fn(),
 }));

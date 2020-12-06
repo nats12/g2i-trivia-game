@@ -33,7 +33,6 @@ const HomeBottomContainer = styled.div`
 `;
 
 export const Home = ({ questions }: any) => {
-  console.log(questions);
   if (questions.length === 0 || !questions) {
     return (
       <CentredContainer>

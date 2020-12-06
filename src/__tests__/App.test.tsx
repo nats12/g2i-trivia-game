@@ -6,6 +6,17 @@ import App from "../components/App";
 
 configure({ adapter: new Adapter() });
 
+jest.mock("react-redux", () => ({
+  useSelector: jest
+    .fn((fn) => fn())
+    .mockReturnValue({
+      users: [],
+      usersState: [],
+    }),
+  useDispatch: jest.fn(),
+  connect: () => jest.fn(),
+}));
+
 const setup = () => {
   const wrapper = shallow(<App />);
   return wrapper;

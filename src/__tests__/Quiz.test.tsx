@@ -11,7 +11,7 @@ jest.mock("react-redux", () => ({
   connect: () => jest.fn(),
 }));
 
-const setup = (questions = {}) => {
+const setup = (questions: any = {}) => {
   const store = testUtils.storeFactory(questions);
   const wrapper = shallow(<Quiz questions={store.getState().questions} />);
 
@@ -22,7 +22,9 @@ describe("Store has questions", () => {
   let wrapper: any;
 
   beforeEach(() => {
-    wrapper = setup({ questions: ["test"] });
+    wrapper = setup({
+      questions: [{ category: "science", text: "test text" }],
+    });
   });
 
   test("Quiz component renders without error", () => {
