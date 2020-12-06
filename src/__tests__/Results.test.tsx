@@ -10,7 +10,7 @@ const setup = (state: {}) => {
   const store = testUtils.storeFactory(state);
   const wrapper = shallow(
     <Results
-      results={store.getState().questions}
+      results={store.getState().results}
       error={store.getState().errors}
     />
   );

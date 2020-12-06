@@ -1,7 +1,9 @@
 import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Error } from "../Error";
 import { CentredContainer } from "../styled/CentredContainer";
+import { ScreenContainer } from "../styled/ScreenContainer";
 import StyledLoader from "../StyledLoader";
 
 export const Results = ({ results, error }: any) => {
@@ -21,7 +23,25 @@ export const Results = ({ results, error }: any) => {
     );
   }
 
-  return <p data-test="component-results">Results</p>;
+  return (
+    <ScreenContainer data-test="component-results">
+      <Container>
+        <Row>
+          <Col>
+            {results &&
+              results.map((r: any, key: number) => {
+                return (
+                  <div key={key}>
+                    <p>{r.correct_answer === r.given_answer ? "+" : "-"}</p>
+                    <p>{r.question}</p>
+                  </div>
+                );
+              })}
+          </Col>
+        </Row>
+      </Container>
+    </ScreenContainer>
+  );
 };
 
 const mapStateToProps = (state: any) => {

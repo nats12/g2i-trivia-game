@@ -69,7 +69,7 @@ export const Quiz = ({
   }
 
   if (results.length === questions.length) {
-    return <Results results={results} />;
+    return <Results results={results} error={error} />;
   }
 
   const nextQuestion = (question: Question, answer: string) => {
@@ -77,6 +77,7 @@ export const Quiz = ({
     updateResults(question.id, question.text, question.correct_answer, answer);
   };
 
+  console.log(questions);
   return (
     <ScreenContainer data-test="component-quiz">
       <Container>
