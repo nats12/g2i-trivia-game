@@ -1,10 +1,29 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
+import styled from "styled-components";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+
+import { colours } from "../../theme/colours";
 import { Error } from "../Error";
 import { CentredContainer } from "../styled/CentredContainer";
 import { ScreenContainer } from "../styled/ScreenContainer";
+import { StyledH2 } from "../styled/ScreenHeadings";
 import StyledLoader from "../StyledLoader";
+import {
+  ResultRow,
+  ResultRowIconContainer,
+  ResultRowQuestion,
+} from "../styled/ResultRow";
+import { StyledButton } from "../styled/Button";
+
+const ResultsInnerContainer = styled.div`
+  background-color: white;
+`;
+
+const ResultsHeader = styled.header`
+  background-color: ${colours.primary};
+`;
 
 export const Results = ({ results, error }: any) => {
   if (error !== null && error !== "") {
@@ -24,19 +43,49 @@ export const Results = ({ results, error }: any) => {
   }
 
   return (
-    <ScreenContainer data-test="component-results">
+    <ScreenContainer data-test="component-results" backgroundColour="white">
+      <ResultsHeader>
+        <StyledH2>
+          You scored{" "}
+          {
+            results.filter((r: any) => {
+              return r.correct_answer === r.given_answer;
+            }).length
+          }{" "}
+          / {results.length}
+        </StyledH2>
+      </ResultsHeader>
       <Container>
         <Row>
-          <Col>
-            {results &&
-              results.map((r: any, key: number) => {
-                return (
-                  <div key={key}>
-                    <p>{r.correct_answer === r.given_answer ? "+" : "-"}</p>
-                    <p>{r.question}</p>
-                  </div>
-                );
-              })}
+          <Col xs={12}>
+            <ResultsInnerContainer>
+              {results &&
+                results.map((r: any, key: number) => {
+                  return (
+                    <ResultRow key={key}>
+                      <ResultRowIconContainer>
+                        {r.correct_answer === r.given_answer ? (
+                          <AiOutlinePlus className="correct" />
+                        ) : (
+                          <AiOutlineMinus className="incorrect" />
+                        )}
+                      </ResultRowIconContainer>
+                      <ResultRowQuestion>{r.question}</ResultRowQuestion>
+                    </ResultRow>
+                  );
+                })}
+            </ResultsInnerContainer>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <StyledButton
+              border={colours.primary}
+              backgroundColour={colours.primary}
+              focusColour={colours.primary}
+            >
+              Play again?
+            </StyledButton>
           </Col>
         </Row>
       </Container>

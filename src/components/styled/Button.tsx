@@ -4,13 +4,14 @@ type IButton = {
   backgroundColour?: string;
   color?: string;
   border?: string;
+  focusColour?: string;
 };
 
 export const StyledButton = styled.button<IButton>`
   text-transform: uppercase;
   background-color: ${(props) => props.backgroundColour || "transparent"};
   color: ${(props) => props.color || "white"};
-  border: ${(props) => `1px solid ${props.border}` || "1px solid"};
+  border: ${(props) => `1px solid ${props.border}` || "none"};
   border-radius: 5px;
   padding: 20px 50px;
   margin: 20px;
@@ -29,6 +30,7 @@ export const StyledButton = styled.button<IButton>`
   &:focus {
     outline: none;
     background-color: transparent;
+    color: ${(props) => props.focusColour || "white"};
     border: ${(props) => `2px solid ${props.border}` || "1px solid"};
   }
 `;
