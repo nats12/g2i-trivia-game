@@ -1,5 +1,7 @@
 # Welcome To 2020's Best Trivia Game App!
 
+Responsive for all to enjoy on either desktop or mobile!
+
 ### How To Play
 
 - Tap Begin on the home page to start the quiz
