@@ -3,12 +3,15 @@ import { Switch, Route } from "react-router-dom";
 
 import * as questionsActions from "../store/actions/questions";
 import * as resultsActions from "../store/actions/results";
+import * as errorsActions from "../store/actions/error";
 import "../App.css";
 import { Results } from "./screens/Results";
 import { connect } from "react-redux";
 import { Quiz } from "./screens/Quiz";
 import { Home } from "./screens/Home";
 import { ICombinedStates } from "../interfaces/StateInterfaces";
+import { CentredContainer } from "./styled/CentredContainer";
+import { Error } from "./Error";
 
 export function App({
   questions,
@@ -20,18 +23,27 @@ export function App({
   resetQuiz,
   fetchQuestions,
   resetCurrentQuestion,
+  setError,
 }: any) {
   const fetchQs = useCallback(() => {
     try {
       fetchQuestions();
     } catch (err) {
-      console.log(err);
+      setError("Application error");
     }
-  }, [fetchQuestions]);
+  }, [fetchQuestions, setError]);
 
   useEffect(() => {
     fetchQs();
   }, [fetchQs]);
+
+  if (error !== null && error !== "") {
+    return (
+      <CentredContainer data-test="component-error">
+        <Error>{error}</Error>
+      </CentredContainer>
+    );
+  }
 
   return (
     <Switch data-test="component-app">
@@ -92,6 +104,9 @@ const mapDispatchToProps = (dispatch: any) => {
     },
     resetCurrentQuestion: () => {
       dispatch(questionsActions.resetCurrentQuestion());
+    },
+    setError: (msg: string) => {
+      dispatch(errorsActions.setError(msg));
     },
   };
 };

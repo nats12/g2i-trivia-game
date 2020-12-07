@@ -34,3 +34,20 @@ test("App renders without error", () => {
   const component = testUtils.findByTestAttr(wrapper, "component-app");
   expect(component.length).toBe(1);
 });
+
+describe("Store has errors", () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = setup({
+      questions: [],
+      errors: "Network error",
+      results: [],
+    });
+  });
+
+  test("Error component is rendered", () => {
+    const component = testUtils.findByTestAttr(wrapper, "component-error");
+    expect(component.exists()).toBe(true);
+  });
+});
