@@ -8,6 +8,10 @@ export const actionTypes = {
   RESET_CURRENT_QUESTION: "RESET_CURRENT_QUESTION",
 };
 
+/**
+ * Fetches quiz questions from the API and creates Quiz class objects which are then
+ * stored in the redux store within an array
+ */
 export const fetch = () => {
   return async (dispatch: any) => {
     try {
@@ -65,10 +69,18 @@ export const fetch = () => {
   };
 };
 
+/**
+ * Dispatches the update_current_question type to the questions reducer
+ * This will always result in the current question being incremented by one
+ */
 export const updateCurrentQuestion = () => {
   return { type: actionTypes.UPDATE_CURRENT_QUESTION };
 };
 
+/**
+ * Dispatches the reset_current_question type to the questions reducer
+ * This will always result in the current question being reset to 0
+ */
 export const resetCurrentQuestion = () => {
   return { type: actionTypes.RESET_CURRENT_QUESTION };
 };

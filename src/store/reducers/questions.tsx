@@ -6,6 +6,11 @@ const initialState: IQuestionsState = {
   currentQuestion: 0,
 };
 
+/**
+ * Questions reducer
+ * @param state the store's state
+ * @param action action containing type and payload
+ */
 export const questionsReducer = (
   state: IQuestionsState = initialState,
   action: IAction

@@ -52,6 +52,17 @@ const CardContainer = styled.div`
   align-items: center;
   font-size: 1.2em;
 `;
+
+/**
+ * The Quiz component - the screen from which quiz questions are answered.
+ * @param questions question state from the redux store
+ * @param currentQuestion currentQuestion state from the redux store
+ * @param updateCurrentQuestion updateCurrentQuestion function from the question store's actions
+ * @param updateResults updateResults function from the question store's actions
+ * @param resetQuiz resetQuiz function from the question store's actions
+ * @param results  results state from the redux store
+ * @param error error state from the redux store
+ */
 export const Quiz: React.FC<any> = ({
   questions,
   currentQuestion,
@@ -81,8 +92,15 @@ export const Quiz: React.FC<any> = ({
     return <Results results={results} error={error} resetQuiz={resetQuiz} />;
   }
 
-  const nextQuestion = (e: any, question: Question, answer: string) => {
-    e.preventDefault();
+  /**
+   * nextQuestion dispatches two actions:
+   * updateCurrentQuestion - to increment the current question by one
+   * updateResults - to add a new result object to the results array containing the user's answer to the question
+   * @param e
+   * @param question
+   * @param answer
+   */
+  const nextQuestion = (question: Question, answer: string) => {
     updateCurrentQuestion();
     updateResults(question.id, question.text, question.correct_answer, answer);
   };
@@ -119,8 +137,8 @@ export const Quiz: React.FC<any> = ({
                   </CardContainer>
                   <ButtonsContainer>
                     <StyledButton
-                      onClick={(e) =>
-                        nextQuestion(e, questions[currentQuestion], "True")
+                      onClick={() =>
+                        nextQuestion(questions[currentQuestion], "True")
                       }
                       border={colours.green}
                       backgroundColour={colours.green}
@@ -128,8 +146,8 @@ export const Quiz: React.FC<any> = ({
                       True
                     </StyledButton>
                     <StyledButton
-                      onClick={(e) =>
-                        nextQuestion(e, questions[currentQuestion], "False")
+                      onClick={() =>
+                        nextQuestion(questions[currentQuestion], "False")
                       }
                       border={colours.red}
                       backgroundColour={colours.red}

@@ -45,6 +45,14 @@ const HomeBottomContainer = styled.div`
   }
 `;
 
+/**
+ * The Home component - the first screen the user will see upon loading the web app.
+ * @param questions question state from the redux store
+ * @param error error state from the redux store
+ * @param resetQuiz resetQuiz function from the question store's actions
+ * @param fetchQuestions fetchQuestions function from the question store's actions
+ * @param resetCurrentQuestion  resetCurrentQuestion function from the question store's actions
+ */
 export const Home: React.FC<any> = ({
   questions,
   error,

@@ -36,7 +36,7 @@ test("App renders without error", () => {
 });
 
 describe("Store has errors", () => {
-  let wrapper;
+  let wrapper: any;
 
   beforeEach(() => {
     wrapper = setup({

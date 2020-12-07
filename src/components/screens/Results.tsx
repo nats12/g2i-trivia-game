@@ -29,6 +29,11 @@ const ResultsHeader = styled.header`
   background-color: ${colours.primary};
 `;
 
+/**
+ * The Results component - rendered at the end of the quiz once the user has answered all questions.
+ * @param results  results state from the redux store
+ * @param error error state from the redux store
+ */
 export const Results: React.FC<any> = ({ results, error }: any) => {
   if (error !== null && error !== "") {
     return (

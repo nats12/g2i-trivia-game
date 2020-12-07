@@ -5,6 +5,11 @@ const initialState: IResultsState = {
   results: [],
 };
 
+/**
+ * Results reducer
+ * @param state the store's state
+ * @param action action containing type and payload
+ */
 export const resultsReducer = (
   state: IResultsState = initialState,
   action: IAction

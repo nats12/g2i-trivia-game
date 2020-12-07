@@ -5,6 +5,11 @@ const initialState: IErrorsState = {
   error: null,
 };
 
+/**
+ * Errors reducer
+ * @param state the store's state
+ * @param action action containing type and payload
+ */
 export const errorsReducer = (
   state: IErrorsState = initialState,
   action: IAction
