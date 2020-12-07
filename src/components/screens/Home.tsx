@@ -89,11 +89,13 @@ export const Home = ({
             </HomeTopContainer>
             <HomeBottomContainer>
               <HalfCircleBackground>
-                <AnimatedButton
-                  backgroundColour={colours.primary}
-                  border={colours.primary}
-                >
-                  <Link to="/quiz">Begin</Link>
+                <AnimatedButton backgroundColour="white" border="transparent">
+                  <Link
+                    style={{ fontSize: "2em", color: colours.primary }}
+                    to="/quiz"
+                  >
+                    Begin
+                  </Link>
                 </AnimatedButton>
               </HalfCircleBackground>
             </HomeBottomContainer>

@@ -11,7 +11,7 @@ export const StyledButton = styled.button<IButton>`
   text-transform: uppercase;
   background-color: ${(props) => props.backgroundColour || "transparent"};
   color: ${(props) => props.color || "white"};
-  border: ${(props) => `1px solid ${props.border}` || "none"};
+  border: ${(props) => `2px solid ${props.border}` || "none"};
   border-radius: 5px;
   padding: 20px 50px;
   margin: 20px;

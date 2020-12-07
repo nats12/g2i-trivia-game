@@ -8,5 +8,4 @@ export const ScreenContainer = styled.div<any>`
   overflow: auto;
   box-sizing: border-box;
   text-align: center;
-  padding-bottom: 50px;
 `;
