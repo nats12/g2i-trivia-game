@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { Switch, Route } from "react-router-dom";
 
 import * as questionsActions from "../store/actions/questions";
 import * as resultsActions from "../store/actions/results";
@@ -9,6 +8,7 @@ import { Results } from "./screens/Results";
 import { connect, useDispatch } from "react-redux";
 import { Quiz } from "./screens/Quiz";
 import { Home } from "./screens/Home";
+import { ICombinedStates } from "../interfaces/StateInterfaces";
 
 export function App({
   questions,
@@ -21,17 +21,13 @@ export function App({
   fetchQuestions,
   resetCurrentQuestion,
 }: any) {
-  const history: any = createBrowserHistory();
-
-  const dispatch = useDispatch();
-
   const fetchQs = useCallback(() => {
     try {
-      dispatch(questionsActions.fetch());
+      fetchQuestions();
     } catch (err) {
       console.log(err);
     }
-  }, [dispatch]);
+  }, [fetchQuestions]);
 
   useEffect(() => {
     fetchQs();
@@ -66,16 +62,16 @@ export function App({
   );
 }
 
-const mapStateToProps = (state: any, ownProps: any) => ({
-  questions: state.questions.questions,
-  currentQuestion: state.questions.currentQuestion,
-  error: state.errors.error,
-  results: state.results.results,
+const mapStateToProps = (state: ICombinedStates) => ({
+  questions: state.questions?.questions,
+  currentQuestion: state.questions?.currentQuestion,
+  error: state.errors?.error,
+  results: state.results?.results,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    updateCurrentQuestion: (id: number) => {
+    updateCurrentQuestion: () => {
       dispatch(questionsActions.updateCurrentQuestion());
     },
     updateResults: (

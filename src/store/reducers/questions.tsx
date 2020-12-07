@@ -1,14 +1,9 @@
-import { IQuestionsState } from "../../interfaces/StateInterfaces";
+import { IAction, IQuestionsState } from "../../interfaces/StateInterfaces";
 import { actionTypes } from "../actions/questions";
 
 const initialState: IQuestionsState = {
   questions: [],
   currentQuestion: 0,
-};
-
-type IAction = {
-  type: string;
-  payload: any;
 };
 
 export const questionsReducer = (

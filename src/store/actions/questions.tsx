@@ -19,7 +19,6 @@ export const fetch = () => {
           return res;
         })
         .catch((err) => {
-          console.log(err);
           dispatch({
             type: errorActionTypes.SET_ERROR,
             payload: err.message,
@@ -58,7 +57,6 @@ export const fetch = () => {
         payload: loadedQuestions,
       });
     } catch (err) {
-      console.log(err);
       dispatch({
         type: errorActionTypes.SET_ERROR,
         payload: "App error",

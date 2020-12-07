@@ -3,6 +3,11 @@ import { Card } from "react-bootstrap";
 import styled from "styled-components";
 import { colours } from "../../theme/colours";
 
+interface IQuestionCardProps {
+  children?: any;
+  questionNumber: number;
+}
+
 const QuestionCardNumbers = styled.div`
   div {
     margin: 20px 0;
@@ -10,7 +15,9 @@ const QuestionCardNumbers = styled.div`
     color: ${colours.light_grey};
   }
 `;
-const QuestionCard = (props: any) => {
+const QuestionCard: React.FC<IQuestionCardProps> = (
+  props: IQuestionCardProps
+) => {
   return (
     <>
       <Card style={{ width: "18rem" }}>

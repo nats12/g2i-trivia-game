@@ -16,10 +16,10 @@ import {
   ResultRowIconContainer,
   ResultRowQuestion,
 } from "../styled/ResultRow";
-import { StyledButton } from "../styled/Button";
-import { Link, Redirect } from "react-router-dom";
-import * as resultsActions from "../../store/actions/results";
+import { Link } from "react-router-dom";
 import { AnimatedButton } from "../styled/AnimatedButton";
+import { IResult } from "../../interfaces/IResult";
+import { ICombinedStates } from "../../interfaces/StateInterfaces";
 
 const ResultsInnerContainer = styled.div`
   background-color: white;
@@ -29,7 +29,7 @@ const ResultsHeader = styled.header`
   background-color: ${colours.primary};
 `;
 
-export const Results = ({ results, error }: any) => {
+export const Results: React.FC<any> = ({ results, error }: any) => {
   if (error !== null && error !== "") {
     return (
       <CentredContainer data-test="component-error">
@@ -64,7 +64,7 @@ export const Results = ({ results, error }: any) => {
           <Col xs={12}>
             <ResultsInnerContainer>
               {results &&
-                results.map((r: any, key: number) => {
+                results.map((r: IResult, key: number) => {
                   return (
                     <ResultRow key={key}>
                       <ResultRowIconContainer>
@@ -99,10 +99,10 @@ export const Results = ({ results, error }: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ICombinedStates) => {
   return {
-    results: state.questions.results,
-    error: state.errors.error,
+    results: state.results?.results,
+    error: state.errors?.error,
   };
 };
 

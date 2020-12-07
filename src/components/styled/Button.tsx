@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-type IButton = {
+type IStyledButton = {
   backgroundColour?: string;
   color?: string;
   border?: string;
   focusColour?: string;
 };
 
-export const StyledButton = styled.button<IButton>`
+export const StyledButton = styled.button<IStyledButton>`
   text-transform: uppercase;
   background-color: ${(props) => props.backgroundColour || "transparent"};
   color: ${(props) => props.color || "white"};

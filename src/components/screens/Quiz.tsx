@@ -1,13 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 
 import * as questionsActions from "../../store/actions/questions";
 import * as resultsActions from "../../store/actions/results";
 import { colours } from "../../theme/colours";
-import { IQuestionsState } from "../../interfaces/StateInterfaces";
 import { StyledButton } from "../styled/Button";
 import { CentredContainer } from "../styled/CentredContainer";
 import QuestionCard from "../styled/QuestionCard";
@@ -18,6 +17,7 @@ import Question from "../../models/Question";
 import { Error } from "../Error";
 import { Results } from "./Results";
 import { devices } from "../../theme/devices";
+import { ICombinedStates } from "../../interfaces/StateInterfaces";
 
 const QuizInnerContainer = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ const CardContainer = styled.div`
   align-items: center;
   font-size: 1.2em;
 `;
-export const Quiz = ({
+export const Quiz: React.FC<any> = ({
   questions,
   currentQuestion,
   updateCurrentQuestion,
@@ -147,16 +147,16 @@ export const Quiz = ({
   );
 };
 
-const mapStateToProps = (state: any, ownProps: any) => ({
-  questions: state.questions.questions,
-  currentQuestion: state.questions.currentQuestion,
-  results: state.results.results,
-  error: state.errors.error,
+const mapStateToProps = (state: ICombinedStates) => ({
+  questions: state.questions?.questions,
+  currentQuestion: state.questions?.currentQuestion,
+  results: state.results?.results,
+  error: state.errors?.error,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    updateCurrentQuestion: (id: number) => {
+    updateCurrentQuestion: () => {
       dispatch(questionsActions.updateCurrentQuestion());
     },
     updateResults: (

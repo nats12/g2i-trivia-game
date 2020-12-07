@@ -15,3 +15,9 @@ export interface IAction {
   type: string;
   payload: [];
 }
+
+export interface ICombinedStates {
+  questions?: { questions: []; currentQuestion: number };
+  results?: { results: [] };
+  errors?: { error: null | string };
+}

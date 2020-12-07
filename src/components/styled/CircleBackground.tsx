@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colours } from "../../theme/colours";
 import { devices } from "../../theme/devices";
 
-export const HalfCircleBackground = styled.div`
+export const CircleBackground = styled.div`
   background: white;
   width: 250px;
   height: 250px;

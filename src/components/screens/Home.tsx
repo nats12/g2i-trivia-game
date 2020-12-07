@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
 import * as resultsActions from "../../store/actions/results";
 import * as questionsActions from "../../store/actions/questions";
@@ -8,9 +8,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import styled from "styled-components";
-import { StyledButton } from "../styled/Button";
 import { colours } from "../../theme/colours";
-import { HalfCircleBackground } from "../styled/HalfCircleBackground";
+import { CircleBackground } from "../styled/CircleBackground";
 import StyledLoader from "../StyledLoader";
 import { CentredContainer } from "../styled/CentredContainer";
 import { Link } from "react-router-dom";
@@ -18,6 +17,7 @@ import { Error } from "../Error";
 import { StyledH1, StyledH2 } from "../styled/ScreenHeadings";
 import { devices } from "../../theme/devices";
 import { AnimatedButton } from "../styled/AnimatedButton";
+import { ICombinedStates } from "../../interfaces/StateInterfaces";
 
 const HomeTopContainer = styled.div`
   color: white;
@@ -45,10 +45,9 @@ const HomeBottomContainer = styled.div`
   }
 `;
 
-export const Home = ({
+export const Home: React.FC<any> = ({
   questions,
   error,
-  results,
   resetQuiz,
   fetchQuestions,
   resetCurrentQuestion,
@@ -88,7 +87,7 @@ export const Home = ({
               <StyledH2>Can you score 100%?</StyledH2>
             </HomeTopContainer>
             <HomeBottomContainer>
-              <HalfCircleBackground>
+              <CircleBackground>
                 <AnimatedButton backgroundColour="white" border="transparent">
                   <Link
                     style={{ fontSize: "2em", color: colours.primary }}
@@ -97,7 +96,7 @@ export const Home = ({
                     Begin
                   </Link>
                 </AnimatedButton>
-              </HalfCircleBackground>
+              </CircleBackground>
             </HomeBottomContainer>
           </Col>
         </Row>
@@ -106,10 +105,10 @@ export const Home = ({
   );
 };
 
-const mapStateToProps = (state: any, ownProps: any) => ({
-  questions: state.questions.questions,
-  error: state.errors.error,
-  results: state.results.results,
+const mapStateToProps = (state: ICombinedStates) => ({
+  questions: state.questions?.questions,
+  error: state.errors?.error,
+  results: state.results?.results,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
