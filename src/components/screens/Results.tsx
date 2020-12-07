@@ -16,6 +16,8 @@ import {
   ResultRowQuestion,
 } from "../styled/ResultRow";
 import { StyledButton } from "../styled/Button";
+import { Link, Redirect } from "react-router-dom";
+import * as resultsActions from "../../store/actions/results";
 
 const ResultsInnerContainer = styled.div`
   background-color: white;
@@ -84,7 +86,7 @@ export const Results = ({ results, error }: any) => {
               backgroundColour={colours.primary}
               focusColour={colours.primary}
             >
-              Play again?
+              <Link to="/">Play again</Link>
             </StyledButton>
           </Col>
         </Row>

@@ -27,6 +27,12 @@ export const questionsReducer = (
         questions: state.questions,
         currentQuestion: state.currentQuestion + 1,
       };
+    case actionTypes.RESET_CURRENT_QUESTION:
+      return {
+        ...state,
+        questions: state.questions,
+        currentQuestion: 0,
+      };
     default:
       return state;
   }

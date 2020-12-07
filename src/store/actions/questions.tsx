@@ -5,6 +5,7 @@ import { actionTypes as errorActionTypes } from "../actions/error";
 export const actionTypes = {
   FETCH_QUESTIONS: "FETCH_QUESTIONS",
   UPDATE_CURRENT_QUESTION: "UPDATE_CURRENT_QUESTION",
+  RESET_CURRENT_QUESTION: "RESET_CURRENT_QUESTION",
 };
 
 export const fetch = () => {
@@ -68,4 +69,8 @@ export const fetch = () => {
 
 export const updateCurrentQuestion = () => {
   return { type: actionTypes.UPDATE_CURRENT_QUESTION };
+};
+
+export const resetCurrentQuestion = () => {
+  return { type: actionTypes.RESET_CURRENT_QUESTION };
 };

@@ -18,6 +18,11 @@ export const resultsReducer = (
         ...state,
         results: results,
       };
+    case actionTypes.RESET_RESULTS:
+      return {
+        ...state,
+        results: action.payload,
+      };
     default:
       return state;
   }

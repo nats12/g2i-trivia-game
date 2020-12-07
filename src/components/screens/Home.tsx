@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 
+import * as resultsActions from "../../store/actions/results";
 import * as questionsActions from "../../store/actions/questions";
 import { ScreenContainer } from "../styled/ScreenContainer";
 import Container from "react-bootstrap/Container";
@@ -33,7 +34,20 @@ const HomeBottomContainer = styled.div`
   overflow: hidden;
 `;
 
-export const Home = ({ questions, error }: any = []) => {
+export const Home = ({
+  questions,
+  error,
+  results,
+  resetQuiz,
+  fetchQuestions,
+  resetCurrentQuestion,
+}: any = []) => {
+  useEffect(() => {
+    fetchQuestions();
+    resetQuiz();
+    resetCurrentQuestion();
+  }, [fetchQuestions, resetCurrentQuestion, resetQuiz]);
+
   if (error !== null && error !== "") {
     return (
       <CentredContainer data-test="component-error">
@@ -80,4 +94,18 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   results: state.results.results,
 });
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    resetQuiz: () => {
+      dispatch(resultsActions.resetResults());
+    },
+    fetchQuestions: () => {
+      dispatch(questionsActions.fetch());
+    },
+    resetCurrentQuestion: () => {
+      dispatch(questionsActions.resetCurrentQuestion());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -49,10 +49,11 @@ export const Quiz = ({
   currentQuestion,
   updateCurrentQuestion,
   updateResults,
+  resetQuiz,
   results,
   error,
 }: any = []) => {
-  if (error !== null && error !== "") {
+  if (error && error !== null && error !== "") {
     return (
       <CentredContainer data-test="component-error">
         <Error>{error}</Error>
@@ -60,7 +61,7 @@ export const Quiz = ({
     );
   }
 
-  if (questions.length === 0 && error === null) {
+  if (questions && questions.length === 0 && error === null) {
     return (
       <CentredContainer>
         <StyledLoader data-test="component-loading" />
@@ -68,8 +69,8 @@ export const Quiz = ({
     );
   }
 
-  if (results.length === questions.length) {
-    return <Results results={results} error={error} />;
+  if (results && results.length === questions.length) {
+    return <Results results={results} error={error} resetQuiz={resetQuiz} />;
   }
 
   const nextQuestion = (question: Question, answer: string) => {
@@ -84,8 +85,12 @@ export const Quiz = ({
         <Row xs={12}>
           <Col>
             <QuizInnerContainer>
-              {currentQuestion > questions.length - 1 ? (
-                "test"
+              {currentQuestion > questions?.length - 1 ? (
+                <Results
+                  results={results}
+                  error={error}
+                  resetQuiz={resetQuiz}
+                />
               ) : (
                 <>
                   <StyledH2>{questions[currentQuestion]?.category}</StyledH2>
@@ -148,6 +153,9 @@ const mapDispatchToProps = (dispatch: any) => {
       dispatch(
         resultsActions.updateResults(id, question, correct_answer, given_answer)
       );
+    },
+    resetQuiz: () => {
+      dispatch(resultsActions.resetResults());
     },
   };
 };
