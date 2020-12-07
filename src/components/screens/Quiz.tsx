@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import styled from "styled-components";
+import ReactMarkdown from "react-markdown";
 
 import * as questionsActions from "../../store/actions/questions";
 import * as resultsActions from "../../store/actions/results";
@@ -73,12 +74,12 @@ export const Quiz = ({
     return <Results results={results} error={error} resetQuiz={resetQuiz} />;
   }
 
-  const nextQuestion = (question: Question, answer: string) => {
+  const nextQuestion = (e: any, question: Question, answer: string) => {
+    e.preventDefault();
     updateCurrentQuestion();
     updateResults(question.id, question.text, question.correct_answer, answer);
   };
 
-  console.log(questions);
   return (
     <ScreenContainer data-test="component-quiz">
       <Container>
@@ -99,13 +100,15 @@ export const Quiz = ({
                       key={currentQuestion}
                       questionNumber={currentQuestion}
                     >
-                      {questions[currentQuestion]?.text}
+                      <ReactMarkdown>
+                        {questions[currentQuestion]?.text}
+                      </ReactMarkdown>
                     </QuestionCard>
                   </CardContainer>
                   <ButtonsContainer>
                     <StyledButton
-                      onClick={() =>
-                        nextQuestion(questions[currentQuestion], "True")
+                      onClick={(e) =>
+                        nextQuestion(e, questions[currentQuestion], "True")
                       }
                       border={colours.green}
                       backgroundColour={colours.green}
@@ -113,8 +116,8 @@ export const Quiz = ({
                       True
                     </StyledButton>
                     <StyledButton
-                      onClick={() =>
-                        nextQuestion(questions[currentQuestion], "False")
+                      onClick={(e) =>
+                        nextQuestion(e, questions[currentQuestion], "False")
                       }
                       border={colours.red}
                       backgroundColour={colours.red}

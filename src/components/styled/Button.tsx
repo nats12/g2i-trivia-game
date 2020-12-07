@@ -25,12 +25,15 @@ export const StyledButton = styled.button<IButton>`
 
   &:hover {
     cursor: pointer;
+    opacity: 0.8;
   }
-
   &:focus {
+    outline: none;
+  }
+  &:active {
     outline: none;
     background-color: transparent;
     color: ${(props) => props.focusColour || "white"};
-    border: ${(props) => `2px solid ${props.border}` || "1px solid"};
+    border: ${(props) => `2px solid ${props.border}` || "none"};
   }
 `;

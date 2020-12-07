@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import ReactMarkdown from "react-markdown";
 
 import { colours } from "../../theme/colours";
 import { Error } from "../Error";
@@ -72,7 +73,9 @@ export const Results = ({ results, error }: any) => {
                           <AiOutlineMinus className="incorrect" />
                         )}
                       </ResultRowIconContainer>
-                      <ResultRowQuestion>{r.question}</ResultRowQuestion>
+                      <ResultRowQuestion>
+                        <ReactMarkdown>{r.question}</ReactMarkdown>
+                      </ResultRowQuestion>
                     </ResultRow>
                   );
                 })}

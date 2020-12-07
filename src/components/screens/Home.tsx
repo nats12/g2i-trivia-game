@@ -76,7 +76,10 @@ export const Home = ({
             </HomeTopContainer>
             <HomeBottomContainer>
               <HalfCircleBackground>
-                <StyledButton backgroundColour={colours.primary}>
+                <StyledButton
+                  backgroundColour={colours.primary}
+                  border={colours.primary}
+                >
                   <Link to="/quiz">Begin</Link>
                 </StyledButton>
               </HalfCircleBackground>
