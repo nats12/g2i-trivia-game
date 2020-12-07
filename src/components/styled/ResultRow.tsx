@@ -9,7 +9,7 @@ export const ResultRow = styled.div`
   margin-top: 1em;
 `;
 
-export const ResultRowQuestion = styled.p`
+export const ResultRowQuestion = styled.div`
   width: 80%;
 `;
 
