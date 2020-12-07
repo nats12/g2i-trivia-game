@@ -7,7 +7,6 @@ import { ScreenContainer } from "../styled/ScreenContainer";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { ScreenHeading } from "../styled/ScreenHeading";
 import styled from "styled-components";
 import { StyledButton } from "../styled/Button";
 import { colours } from "../../theme/colours";
@@ -15,8 +14,10 @@ import { HalfCircleBackground } from "../styled/HalfCircleBackground";
 import StyledLoader from "../StyledLoader";
 import { CentredContainer } from "../styled/CentredContainer";
 import { Link } from "react-router-dom";
-import { IQuestionsState } from "../../interfaces/StateInterfaces";
 import { Error } from "../Error";
+import { StyledH1, StyledH2 } from "../styled/ScreenHeadings";
+import { devices } from "../../theme/devices";
+import { AnimatedButton } from "../styled/AnimatedButton";
 
 const HomeTopContainer = styled.div`
   color: white;
@@ -25,13 +26,23 @@ const HomeTopContainer = styled.div`
   justify-content: space-evenly;
   justify-content: space-between;
   height: 65vh;
+
+  @media ${devices.laptop} {
+    height: 50vh;
+  }
 `;
+
 const HomeBottomContainer = styled.div`
   height: 35vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
+
+  @media ${devices.laptop} {
+    height: 50vh;
+  }
 `;
 
 export const Home = ({
@@ -70,18 +81,20 @@ export const Home = ({
         <Row xs={12}>
           <Col>
             <HomeTopContainer>
-              <ScreenHeading>Welcome to the Trivia Challenge!</ScreenHeading>
-              <h2>You will be presented with 10 True or False questions.</h2>
-              <h2>Can you score 100%?</h2>
+              <StyledH1>Welcome to the Trivia Challenge!</StyledH1>
+              <StyledH2>
+                You will be presented with 10 True or False questions.
+              </StyledH2>
+              <StyledH2>Can you score 100%?</StyledH2>
             </HomeTopContainer>
             <HomeBottomContainer>
               <HalfCircleBackground>
-                <StyledButton
+                <AnimatedButton
                   backgroundColour={colours.primary}
                   border={colours.primary}
                 >
                   <Link to="/quiz">Begin</Link>
-                </StyledButton>
+                </AnimatedButton>
               </HalfCircleBackground>
             </HomeBottomContainer>
           </Col>

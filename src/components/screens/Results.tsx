@@ -19,6 +19,7 @@ import {
 import { StyledButton } from "../styled/Button";
 import { Link, Redirect } from "react-router-dom";
 import * as resultsActions from "../../store/actions/results";
+import { AnimatedButton } from "../styled/AnimatedButton";
 
 const ResultsInnerContainer = styled.div`
   background-color: white;
@@ -84,13 +85,13 @@ export const Results = ({ results, error }: any) => {
         </Row>
         <Row>
           <Col xs={12}>
-            <StyledButton
+            <AnimatedButton
               border={colours.primary}
               backgroundColour={colours.primary}
               focusColour={colours.primary}
             >
               <Link to="/">Play again</Link>
-            </StyledButton>
+            </AnimatedButton>
           </Col>
         </Row>
       </Container>

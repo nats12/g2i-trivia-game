@@ -17,12 +17,18 @@ import StyledLoader from "../StyledLoader";
 import Question from "../../models/Question";
 import { Error } from "../Error";
 import { Results } from "./Results";
+import { devices } from "../../theme/devices";
 
 const QuizInnerContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  width: 100%;
+
+  @media ${devices.laptop} {
+    justify-content: space-around;
+  }
 
   .card {
     width: 100% !important;
@@ -83,8 +89,13 @@ export const Quiz = ({
   return (
     <ScreenContainer data-test="component-quiz">
       <Container>
-        <Row xs={12}>
-          <Col>
+        <Row>
+          <Col
+            xs={12}
+            md={{ span: 10, offset: 1 }}
+            lg={{ span: 8, offset: 2 }}
+            xl={8}
+          >
             <QuizInnerContainer>
               {currentQuestion > questions?.length - 1 ? (
                 <Results

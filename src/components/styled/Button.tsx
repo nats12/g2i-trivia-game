@@ -15,7 +15,7 @@ export const StyledButton = styled.button<IButton>`
   border-radius: 5px;
   padding: 20px 50px;
   margin: 20px;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 600;
 
   a {
