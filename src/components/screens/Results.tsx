@@ -90,7 +90,7 @@ export const Results: React.FC<any> = ({ results, error }: any) => {
               backgroundColour={colours.primary}
               focusColour={colours.primary}
             >
-              <Link to="/">Play again</Link>
+              <Link to="/">Play again?</Link>
             </AnimatedButton>
           </Col>
         </Row>

@@ -5,7 +5,7 @@ import * as questionsActions from "../store/actions/questions";
 import * as resultsActions from "../store/actions/results";
 import "../App.css";
 import { Results } from "./screens/Results";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { Quiz } from "./screens/Quiz";
 import { Home } from "./screens/Home";
 import { ICombinedStates } from "../interfaces/StateInterfaces";
